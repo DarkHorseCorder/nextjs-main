@@ -1,0 +1,44 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm i -g yarn
+  displayName: 'npm install yarn'
+
+- script: |
+    yarn config set network-timeout 300000
+  displayName: 'yarn network timeout config'
+
+- script: |
+    yarn install
+  displayName: 'yarn install'
+
+- script: |
+    yarn next build
+  displayName: 'yarn next build'
+
+- script: |
+    yarn next export
+  displayName: 'yarn next export'
+
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: './out'
+    azureSubscription: 'Project Phoenix primary subscription(5c8b517c-4d42-44b2-a56b-061597cca3ad)'
+    Destination: 'AzureBlob'
+    storage: 'deviiadmindev'
+    ContainerName: '$web'

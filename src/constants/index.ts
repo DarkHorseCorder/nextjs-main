@@ -1,0 +1,12 @@
+export const CANCELLED = "Cancelled";
+export const COMPLETED = "Completed";
+export const BASE_URL = "https://pxdbdev.devii.io";
+export const BASE_URL_PRODUCTION = "https://pxdb.devii.io";
+export const ROLE_ID = "role_id";
+export const ACCESS_TOKEN = "access_token";
+export const REFRESH_TOKEN = "refresh_token";
+export const QUERY_URL = "query";
+export const ROLES_PBAC = "roles_pbac";
+export const SCHEMA = "schema";
+export const RPB_SCHEMA = "rpb_schema";
+export const ITEM_HEIGHT = 48;
